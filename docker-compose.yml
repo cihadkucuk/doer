@@ -1,0 +1,14 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?set-in-dokploy-env}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:?set-in-dokploy-env}
+    expose:
+      - "3000"

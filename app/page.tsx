@@ -70,6 +70,14 @@ export default function Home() {
     isOpen: false,
     videoId: "",
   })
+  const [isContactSubmitting, setIsContactSubmitting] = useState(false)
+  const [contactFeedback, setContactFeedback] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({
+    type: null,
+    message: "",
+  })
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -133,9 +141,55 @@ export default function Home() {
     document.body.style.overflow = ""
   }
 
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert("Thank you for your message.")
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const name = String(formData.get("name") ?? "").trim()
+    const email = String(formData.get("email") ?? "").trim()
+    const message = String(formData.get("message") ?? "").trim()
+
+    if (!name || !email || !message) {
+      setContactFeedback({
+        type: "error",
+        message: "Please fill in all fields.",
+      })
+      return
+    }
+
+    setIsContactSubmitting(true)
+    setContactFeedback({ type: null, message: "" })
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      })
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null
+
+      if (!response.ok) {
+        setContactFeedback({
+          type: "error",
+          message: result?.error ?? "Message could not be sent.",
+        })
+        return
+      }
+
+      form.reset()
+      setContactFeedback({
+        type: "success",
+        message: "Thanks, your message has been sent.",
+      })
+    } catch {
+      setContactFeedback({
+        type: "error",
+        message: "Network error, please try again.",
+      })
+    } finally {
+      setIsContactSubmitting(false)
+    }
   }
 
   const renderCompositionGrid = (videos: VideoItem[]) => (
@@ -192,10 +246,43 @@ export default function Home() {
 
                 <div className="contact-form">
                   <form onSubmit={handleContactSubmit}>
-                    <input type="text" placeholder="Your Name" required />
-                    <input type="email" placeholder="Your Email" required />
-                    <textarea placeholder="Your Message" required />
-                    <button type="submit">Send Message</button>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Your Name"
+                      disabled={isContactSubmitting}
+                      required
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                      disabled={isContactSubmitting}
+                      required
+                    />
+                    <textarea
+                      name="message"
+                      placeholder="Your Message"
+                      disabled={isContactSubmitting}
+                      required
+                    />
+                    <button type="submit" disabled={isContactSubmitting}>
+                      {isContactSubmitting ? "Sending..." : "Send Message"}
+                    </button>
+                    {contactFeedback.message && (
+                      <p
+                        role="status"
+                        aria-live="polite"
+                        style={{
+                          color: contactFeedback.type === "error" ? "#ffb4b4" : "#c8ffcc",
+                          marginTop: "6px",
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: "0.95rem",
+                        }}
+                      >
+                        {contactFeedback.message}
+                      </p>
+                    )}
                   </form>
                 </div>
               </div>
