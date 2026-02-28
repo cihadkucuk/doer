@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>doermusic</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="images/index_video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <audio id="background-music" loop preload="auto">
+        <source src="images/homepage-music.wav" type="audio/wav">
+    </audio>
+
+    <button id="music-control" class="music-control" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <div class="container">
+        <div class="left-section">
+            <div id="about" class="content">
+                <div class="contact-section">
+                    <h3 style="font-family: 'Montserrat', sans-serif;">"Music is My Soul"</h3>
+                    <p style="font-family: 'Montserrat', sans-serif; font-style: italic;">-doermusic</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@docstudios.eu</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Prague, Czechia</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                            <textarea placeholder="Your Message" required></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Pages -->
+            <div id="originals-page" class="category-page">
+                <div class="category-header">
+                    <button class="back-button" onclick="showContent('home')"><img src="images/back-arrow.png" alt="Back"></button>
+                    <h2>Originals</h2>
+                </div>
+                <div class="category-content">
+                    <div class="video-grid">
+                        <!-- Video grid içindeki her video-item için -->
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="S_MbbWreC2E">
+                                <img src="https://img.youtube.com/vi/S_MbbWreC2E/maxresdefault.jpg" alt="Video Title">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Video Title</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="2uMHg_rMs5I">
+                                <img src="https://img.youtube.com/vi/2uMHg_rMs5I/maxresdefault.jpg" alt="Original 2">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 2</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="la9_GITuvSw">
+                                <img src="https://img.youtube.com/vi/la9_GITuvSw/maxresdefault.jpg" alt="Original 3">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 3</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="lOE9iBBehlI">
+                                <img src="https://img.youtube.com/vi/lOE9iBBehlI/maxresdefault.jpg" alt="Original 4">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 4</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="ieq1iRQ8NeE">
+                                <img src="https://img.youtube.com/vi/ieq1iRQ8NeE/maxresdefault.jpg" alt="Original 5">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 5</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="ZKHF7wzRWFk">
+                                <img src="https://img.youtube.com/vi/ZKHF7wzRWFk/maxresdefault.jpg" alt="Original 6">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 6</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="6ARS_zFoReA">
+                                <img src="https://img.youtube.com/vi/6ARS_zFoReA/maxresdefault.jpg" alt="Original 7">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 7</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="BbDb0F1BMx8">
+                                <img src="https://img.youtube.com/vi/BbDb0F1BMx8/maxresdefault.jpg" alt="Original 8">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 8</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="i30AM2wM3CI">
+                                <img src="https://img.youtube.com/vi/i30AM2wM3CI/maxresdefault.jpg" alt="Original 9">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 9</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="t-1vM7OlWzw">
+                                <img src="https://img.youtube.com/vi/t-1vM7OlWzw/maxresdefault.jpg" alt="Original 10">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 10</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="UKorp1P3jGw">
+                                <img src="https://img.youtube.com/vi/UKorp1P3jGw/maxresdefault.jpg" alt="Original 11">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 11</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="ZPvqr6FYbYY">
+                                <img src="https://img.youtube.com/vi/ZPvqr6FYbYY/maxresdefault.jpg" alt="Original 12">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 12</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="SgjiSy9hxaA">
+                                <img src="https://img.youtube.com/vi/SgjiSy9hxaA/maxresdefault.jpg" alt="Original 13">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Original Video 13</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="scenes-page" class="category-page">
+                <div class="category-header">
+                    <button class="back-button" onclick="showContent('home')"><img src="images/back-arrow.png" alt="Back"></button>
+                    <h2>Scenes</h2>
+                </div>
+                <div class="category-content">
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="6WqBUVz7JTw">
+                                <img src="https://img.youtube.com/vi/6WqBUVz7JTw/maxresdefault.jpg" alt="Scene 1">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Scene Video 1</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="RN-52YFMpmc">
+                                <img src="https://img.youtube.com/vi/RN-52YFMpmc/maxresdefault.jpg" alt="Scene 2">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Scene Video 2</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="Hl1FdWL0ILE">
+                                <img src="https://img.youtube.com/vi/Hl1FdWL0ILE/maxresdefault.jpg" alt="Scene 3">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Scene Video 3</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="93HIiEuBwmo">
+                                <img src="https://img.youtube.com/vi/93HIiEuBwmo/maxresdefault.jpg" alt="Scene 4">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Scene Video 4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="advertisements-page" class="category-page">
+                <div class="category-header">
+                    <button class="back-button" onclick="showContent('home')"><img src="images/back-arrow.png" alt="Back"></button>
+                    <h2>Advertisements</h2>
+                </div>
+                <div class="category-content">
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="0Xj1_vruRBs">
+                                <img src="https://img.youtube.com/vi/0Xj1_vruRBs/maxresdefault.jpg" alt="Advertisement 1">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Advertisement Video 1</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="RNa04QjtnPI">
+                                <img src="https://img.youtube.com/vi/RNa04QjtnPI/maxresdefault.jpg" alt="Advertisement 2">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Advertisement Video 2</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="TNqOpCY4kfA">
+                                <img src="https://img.youtube.com/vi/TNqOpCY4kfA/maxresdefault.jpg" alt="Advertisement 3">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Advertisement Video 3</span>
+                        </div>
+                        <div class="video-item">
+                            <div class="video-thumbnail" data-video-id="bFfD6p8LCX8">
+                                <img src="https://img.youtube.com/vi/bFfD6p8LCX8/maxresdefault.jpg" alt="Advertisement 4">
+                                <button class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <span class="video-title">Advertisement Video 4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <nav class="navigation">
+                <a class="nav-item" onclick="showContent('home')">Home</a>
+                <div class="nav-item dropdown" id="categoriesDropdown">
+                    <span class="dropdown-toggle">Categories</span>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="showCategory('originals')">Originals</a>
+                        <a class="dropdown-item" onclick="showCategory('scenes')">Scenes</a>
+                        <a class="dropdown-item" onclick="showCategory('advertisements')">Advertisements</a>
+                    </div>
+                </div>
+                <a class="nav-item" onclick="showContent('about')">Contact Us</a>
+            </nav>
+            <div class="logo-container">
+                <div class="logo-text">
+                    <span class="doermusic">doermusic</span>
+                    <span class="by-docstudios">by DOC Studios</span>
+                </div>
+            </div>
+
+            <div class="social-media">
+                <img src="images/instagram.png" alt="Instagram" class="social-icon" onclick="window.open('https://instagram.com/doer.music', '_blank')">
+                <img src="images/spotify.png" alt="Spotify" class="social-icon" onclick="window.open('https://open.spotify.com/artist/5M4zo6H2lLfJkeviPQNb36?si=6mb1-STuTjqgK-Q8UhSeGA', '_blank')">
+                <img src="images/youtube.png" alt="YouTube" class="social-icon" onclick="window.open('https://youtube.com/@doermusicofficial', '_blank')">
+                <img src="images/soundcloud.png" alt="SoundCloud" class="social-icon" onclick="window.open('https://soundcloud.com/doermusic', '_blank')">
+            </div>
+        </div>
+    </div>
+
+    <div id="videoModal" class="video-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeVideoModal()">×</button>
+            <div id="videoContainer" class="video-container"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'sxb1plzcpnl508846'},{'dcenter':'sxb1'},{'cp_id':'10543337'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>
