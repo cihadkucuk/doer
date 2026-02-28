@@ -243,8 +243,6 @@ export default function Home() {
           {currentContent === "contact" && (
             <div className="content active" id="about">
               <div className="contact-section">
-                <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>"Music is My Soul"</h3>
-                <p style={{ fontFamily: "'Montserrat', sans-serif", fontStyle: "italic" }}>-doermusic</p>
                 <div className="contact-info">
                   <div className="contact-item">
                     <i className="fas fa-envelope"></i>
