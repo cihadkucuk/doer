@@ -6,6 +6,15 @@ type ContactPayload = {
   message: string
 }
 
+type TelegramSendMessageResponse = {
+  ok: boolean
+  description?: string
+  error_code?: number
+  result?: {
+    message_id?: number
+  }
+}
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAX_NAME_LENGTH = 120
 const MAX_EMAIL_LENGTH = 200
@@ -71,17 +80,40 @@ export async function POST(request: Request) {
         text,
       }),
     })
+    const rawResponse = await telegramResponse.text()
+    let telegramData: TelegramSendMessageResponse | null = null
 
-    if (!telegramResponse.ok) {
-      const errorText = await telegramResponse.text()
-      console.error(`Telegram sendMessage failed with status ${telegramResponse.status}: ${errorText}`)
+    try {
+      telegramData = JSON.parse(rawResponse) as TelegramSendMessageResponse
+    } catch {
+      telegramData = null
+    }
+
+    if (!telegramResponse.ok || !telegramData?.ok) {
+      const reason =
+        telegramData?.description ??
+        `Telegram request failed (HTTP ${telegramResponse.status}).`
+
+      console.error(
+        "Telegram sendMessage rejected:",
+        JSON.stringify({
+          status: telegramResponse.status,
+          statusText: telegramResponse.statusText,
+          reason,
+          response: rawResponse,
+        }),
+      )
+
       return NextResponse.json(
-        { error: "Failed to deliver message." },
+        { error: `Telegram rejected the message: ${reason}` },
         { status: 502 },
       )
     }
 
-    return NextResponse.json({ ok: true })
+    return NextResponse.json({
+      ok: true,
+      telegramMessageId: telegramData.result?.message_id ?? null,
+    })
   } catch (error) {
     console.error("Telegram request failed:", error)
     return NextResponse.json(
