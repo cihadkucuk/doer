@@ -155,6 +155,10 @@ export default function Home() {
 
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const nativeEvent = e.nativeEvent as Event & {
+      stopImmediatePropagation?: () => void
+    }
+    nativeEvent.stopImmediatePropagation?.()
     const form = e.currentTarget
     const formData = new FormData(form)
     const name = String(formData.get("name") ?? "").trim()
@@ -257,7 +261,7 @@ export default function Home() {
                 </div>
 
                 <div className="contact-form">
-                  <form onSubmit={handleContactSubmit}>
+                  <form onSubmitCapture={handleContactSubmit}>
                     <input
                       type="text"
                       name="name"

@@ -32,8 +32,10 @@ export default function VideoModal({ isOpen, videoId, onClose }: VideoModalProps
           <iframe
             width="100%"
             height="100%"
+            title="Video player"
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
             frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
         </div>

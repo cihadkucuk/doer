@@ -12,26 +12,39 @@ export default function MusicControl() {
 
     audio.volume = 0.5
 
-    const playAudio = () => {
-      audio
-        .play()
-        .then(() => {
-          setIsPlaying(true)
-        })
-        .catch(() => {
-          const handleUserInteraction = () => {
-            if (!isPlaying) {
-              toggleMusic()
-            }
-          }
-
-          document.addEventListener("click", handleUserInteraction, { once: true })
-          document.addEventListener("keydown", handleUserInteraction, { once: true })
-          document.addEventListener("touchstart", handleUserInteraction, { once: true })
-        })
+    const cleanupUserInteractionListeners = () => {
+      document.removeEventListener("click", handleUserInteraction)
+      document.removeEventListener("keydown", handleUserInteraction)
+      document.removeEventListener("touchstart", handleUserInteraction)
     }
 
-    playAudio()
+    const startPlayback = async () => {
+      try {
+        await audio.play()
+        setIsPlaying(true)
+        cleanupUserInteractionListeners()
+      } catch {
+        // Playback still blocked by browser policy.
+      }
+    }
+
+    function handleUserInteraction() {
+      void startPlayback()
+    }
+
+    const enablePlaybackOnInteraction = () => {
+      const options = { once: true } as const
+      document.addEventListener("click", handleUserInteraction, options)
+      document.addEventListener("keydown", handleUserInteraction, options)
+      document.addEventListener("touchstart", handleUserInteraction, options)
+    }
+
+    startPlayback().then(() => {
+      if (!audio.paused) return
+      enablePlaybackOnInteraction()
+    })
+
+    return cleanupUserInteractionListeners
   }, [])
 
   const toggleMusic = () => {
@@ -42,8 +55,14 @@ export default function MusicControl() {
       audio.pause()
       setIsPlaying(false)
     } else {
-      audio.play()
-      setIsPlaying(true)
+      audio
+        .play()
+        .then(() => {
+          setIsPlaying(true)
+        })
+        .catch(() => {
+          setIsPlaying(false)
+        })
     }
   }
 
