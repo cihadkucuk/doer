@@ -80,6 +80,18 @@ export default function Home() {
   })
 
   useEffect(() => {
+    if (contactFeedback.type !== "success" || !contactFeedback.message) {
+      return
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setContactFeedback({ type: null, message: "" })
+    }, 4500)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [contactFeedback.type, contactFeedback.message])
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false)
@@ -270,18 +282,27 @@ export default function Home() {
                       {isContactSubmitting ? "Sending..." : "Send Message"}
                     </button>
                     {contactFeedback.message && (
-                      <p
+                      <div
+                        className={`contact-feedback ${
+                          contactFeedback.type === "error"
+                            ? "is-error"
+                            : "is-success"
+                        }`}
                         role="status"
                         aria-live="polite"
-                        style={{
-                          color: contactFeedback.type === "error" ? "#ffb4b4" : "#c8ffcc",
-                          marginTop: "6px",
-                          fontFamily: "'Montserrat', sans-serif",
-                          fontSize: "0.95rem",
-                        }}
                       >
-                        {contactFeedback.message}
-                      </p>
+                        <i
+                          className={`fas ${
+                            contactFeedback.type === "error"
+                              ? "fa-triangle-exclamation"
+                              : "fa-circle-check"
+                          }`}
+                          aria-hidden="true"
+                        />
+                        <span className="contact-feedback-text">
+                          {contactFeedback.message}
+                        </span>
+                      </div>
                     )}
                   </form>
                 </div>

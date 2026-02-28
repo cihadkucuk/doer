@@ -1151,6 +1151,59 @@ h3 {
     background: rgba(255, 255, 255, 0.3);
 }
 
+.contact-form button:disabled {
+    opacity: 0.72;
+    cursor: not-allowed;
+}
+
+.contact-feedback {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 11px 12px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: linear-gradient(120deg, rgba(12, 20, 34, 0.9), rgba(8, 12, 18, 0.72));
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    text-align: left;
+    animation: contact-feedback-in 220ms ease-out;
+}
+
+.contact-feedback i {
+    font-size: 1rem;
+    opacity: 0.92;
+}
+
+.contact-feedback.is-success {
+    color: #d9ffe4;
+    border-color: rgba(83, 234, 143, 0.48);
+    box-shadow: 0 8px 18px rgba(20, 90, 55, 0.26);
+}
+
+.contact-feedback.is-error {
+    color: #ffdede;
+    border-color: rgba(255, 114, 114, 0.45);
+    box-shadow: 0 8px 18px rgba(112, 26, 26, 0.26);
+}
+
+.contact-feedback-text {
+    flex: 1;
+}
+
+@keyframes contact-feedback-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Video Modal Styles */
 .video-modal {
     position: fixed;
